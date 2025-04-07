@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "morediscs:music_disc_shallow",
+        "morediscs:music_disc_mangrove_swamp",
+        "morediscs:music_disc_potion_of_swiftness"
+    ]
+}

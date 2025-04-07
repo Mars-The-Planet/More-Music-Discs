@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.morediscs.music_disc_vengeful.desc"
+  },
+  "length_in_seconds": 70,
+  "sound_event": {
+    "sound_id": "morediscs:music_disc_vengeful_sound"
+  }
+}

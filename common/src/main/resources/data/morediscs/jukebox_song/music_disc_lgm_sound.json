@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.morediscs.music_disc_lgm.desc"
+  },
+  "length_in_seconds": 100,
+  "sound_event": {
+    "sound_id": "morediscs:music_disc_lgm_sound"
+  }
+}

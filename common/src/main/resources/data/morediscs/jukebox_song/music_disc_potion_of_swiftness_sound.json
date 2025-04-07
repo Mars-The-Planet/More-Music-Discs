@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.morediscs.music_disc_potion_of_swiftness.desc"
+  },
+  "length_in_seconds": 116,
+  "sound_event": {
+    "sound_id": "morediscs:music_disc_potion_of_swiftness_sound"
+  }
+}

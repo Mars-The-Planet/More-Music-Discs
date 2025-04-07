@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.morediscs.music_disc_aggressionegression.desc"
+  },
+  "length_in_seconds": 72,
+  "sound_event": {
+    "sound_id": "morediscs:music_disc_aggressionegression_sound"
+  }
+}

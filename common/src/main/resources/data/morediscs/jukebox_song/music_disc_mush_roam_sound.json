@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.morediscs.music_disc_mush_roam.desc"
+  },
+  "length_in_seconds": 49,
+  "sound_event": {
+    "sound_id": "morediscs:music_disc_mush_roam_sound"
+  }
+}
