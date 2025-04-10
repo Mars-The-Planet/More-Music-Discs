@@ -4,12 +4,14 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -19,7 +21,9 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static com.mars.morediscs.CommonClass.MUSIC_DISCS_NAMES;
 import static com.mars.morediscs.Constants.MOD_ID;
@@ -46,19 +50,25 @@ public class MoreDiscs implements ModInitializer {
                 String[] set = disc_loot.replaceAll("\\s", "").split(",");
 
                 LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-                    for (int i = 0; i < set.length - 2; i++) {
-                        if(key.location().toString().equals(set[0])){
+                    if(key.location().toString().equals(set[0])) {
+                        LootPool.Builder poolBuilder = LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1));
+
+                        for (int i = 0; i < set.length - 2; i++) {
+                            poolBuilder.add(LootItem.lootTableItem(ITEM_LIST.get(set[i + 1])));
+                        }
+
+                        if(set[set.length - 1].equals("S")){
+                            poolBuilder.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER,
+                                    EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)));
+                        }
+                        else{
                             float chance = 1 / Float.parseFloat(set[set.length - 1]);
                             LootItemCondition chanceCondition = LootItemRandomChanceCondition.randomChance(chance).build();
-
-                            LootPool poolBuilder = LootPool.lootPool()
-                                    .setRolls(ConstantValue.exactly(1))
-                                    .conditionally(chanceCondition)
-                                    //TODO: put all discs into a one pool
-                                    .add(LootItem.lootTableItem(ITEM_LIST.get(set[i + 1])))
-                                    .build();
-                            tableBuilder.pool(poolBuilder);
+                            poolBuilder.conditionally(chanceCondition);
                         }
+
+                        tableBuilder.pool(poolBuilder.build());
                     }
                 });
             }

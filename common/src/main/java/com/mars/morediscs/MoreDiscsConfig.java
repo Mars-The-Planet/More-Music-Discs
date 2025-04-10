@@ -34,7 +34,5 @@ public class MoreDiscsConfig extends DeimosConfig {
 
 
             "minecraft:chests/village/village_temple, music_disc_thebrightside, music_disc_forest, 1"
-
-
     );
 }

@@ -25,16 +25,17 @@ public class DiscAdder extends LootModifier {
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext) {
-        if(enable_loot_modifiers){
-            RandomSource random = lootContext.getRandom();
-            ResourceLocation currentTable = lootContext.getQueriedLootTableId();
+        if(!enable_loot_modifiers)
+            return generatedLoot;
 
-            for (String disc_loot : discs_loot_list) {
-                String[] set = disc_loot.replaceAll("\\s", "").split(",");
-                for (int i = 0; i < set.length - 2; i++) {
-                    if(set[0].equals(currentTable.toString()) && 1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
-                        generatedLoot.add(new ItemStack(ITEM_LIST.get(set[i + 1]).asItem()));
-                }
+        RandomSource random = lootContext.getRandom();
+        ResourceLocation currentTable = lootContext.getQueriedLootTableId();
+
+        for (String disc_loot : discs_loot_list) {
+            String[] set = disc_loot.replaceAll("\\s", "").split(",");
+            for (int i = 0; i < set.length - 2; i++) {
+                if(set[0].equals(currentTable.toString()) && 1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
+                    generatedLoot.add(new ItemStack(ITEM_LIST.get(set[i + 1]).asItem()));
             }
         }
 
