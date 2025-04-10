@@ -48,27 +48,16 @@ public class MoreDiscs implements ModInitializer {
                 LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
                     for (int i = 0; i < set.length - 2; i++) {
                         if(key.location().toString().equals(set[0])){
-                            if(set[0].contains("entities")){
-                                LootItemCondition chanceCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, );
+                            float chance = 1 / Float.parseFloat(set[set.length - 1]);
+                            LootItemCondition chanceCondition = LootItemRandomChanceCondition.randomChance(chance).build();
 
-                                LootPool poolBuilder = LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1))
-                                        .conditionally(chanceCondition)
-                                        .add(LootItem.lootTableItem(ITEM_LIST.get(set[i + 1])))
-                                        .build();
-                                tableBuilder.pool(poolBuilder);
-                            }
-                            else{
-                                float chance = 1 / Float.parseFloat(set[set.length - 1]);
-                                LootItemCondition chanceCondition = LootItemRandomChanceCondition.randomChance(chance).build();
-
-                                LootPool poolBuilder = LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1))
-                                        .conditionally(chanceCondition)
-                                        .add(LootItem.lootTableItem(ITEM_LIST.get(set[i + 1])))
-                                        .build();
-                                tableBuilder.pool(poolBuilder);
-                            }
+                            LootPool poolBuilder = LootPool.lootPool()
+                                    .setRolls(ConstantValue.exactly(1))
+                                    .conditionally(chanceCondition)
+                                    //TODO: put all discs into a one pool
+                                    .add(LootItem.lootTableItem(ITEM_LIST.get(set[i + 1])))
+                                    .build();
+                            tableBuilder.pool(poolBuilder);
                         }
                     }
                 });
