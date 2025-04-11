@@ -10,13 +10,13 @@ public class MoreDiscsConfig extends DeimosConfig {
     @Entry public static List<String> discs_loot_list = Lists.newArrayList(
             "minecraft:chests/desert_pyramid, music_disc_sand, music_disc_scorched, 1",
             "minecraft:chests/jungle_temple, music_disc_intothejungle, music_disc_jungle, music_disc_jungler, 1",
-            "minecraft:chests/igloo_chest, music_disc_chill, music_disc_dropclouds, 1",
+            "minecraft:chests/igloo_chest, music_disc_42, music_disc_chill, music_disc_dropclouds, 1",
             "minecraft:chests/abandoned_mineshaft, music_disc_amethyzied, music_disc_mesa_depth, music_disc_before, 1",
             "minecraft:chests/stronghold_corridor, music_disc_anti, music_disc_aether, 1",
 
             "minecraft:chests/ancient_city, music_disc_wardensprize, music_disc_thedarkside, music_disc_silence, music_disc_sound, music_disc_warden, music_disc_left_shift, 1",
             "minecraft:chests/pillager_outpost, music_disc_omen, music_disc_raid, music_disc_ravage, 1",
-            "minecraft:chests/simple_dungeon, music_disc_retri, 1",
+            "minecraft:chests/simple_dungeon, music_disc_retri, music_disc_activate, 1",
 
             "minecraft:chests/nether_bridge, music_disc_thelostsoul, music_disc_warped_forest, music_disc_vengeful, music_disc_stridehop, music_disc_witherdance, music_disc_soul, music_disc_victory, 1",
             "minecraft:chests/bastion_other, music_disc_blazetrap, 1",
