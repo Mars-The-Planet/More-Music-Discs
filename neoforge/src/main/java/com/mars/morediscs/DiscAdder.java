@@ -5,12 +5,17 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
+
+import java.util.ArrayList;
 
 import static com.mars.morediscs.MoreDiscs.ITEM_LIST;
 import static com.mars.morediscs.MoreDiscsConfig.discs_loot_list;
@@ -33,13 +38,37 @@ public class DiscAdder extends LootModifier {
 
         for (String disc_loot : discs_loot_list) {
             String[] set = disc_loot.replaceAll("\\s", "").split(",");
+            ArrayList<ItemStack> itemList = new ArrayList<>();
+            if(set[0].equals(currentTable.toString())){
+                for (int i = 0; i < set.length - 2; i++) {
+                    itemList.add(new ItemStack(ITEM_LIST.get(set[i + 1]).asItem()));
+                }
+
+                if(set[set.length - 1].equals("S")){
+                    if(lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE) != null &&
+                            lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
+                        generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
+                }
+                else if(1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
+                    generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
+            }
+        }
+
+        return generatedLoot;
+
+
+
+
+        //
+        /*for (String disc_loot : discs_loot_list) {
+            String[] set = disc_loot.replaceAll("\\s", "").split(",");
             for (int i = 0; i < set.length - 2; i++) {
                 if(set[0].equals(currentTable.toString()) && 1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
                     generatedLoot.add(new ItemStack(ITEM_LIST.get(set[i + 1]).asItem()));
             }
         }
 
-        return generatedLoot;
+        return generatedLoot;*/
     }
 
     @Override
