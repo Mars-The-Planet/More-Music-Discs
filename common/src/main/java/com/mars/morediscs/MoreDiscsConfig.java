@@ -24,7 +24,7 @@ public class MoreDiscsConfig extends DeimosConfig {
 
             "minecraft:chests/shipwreck_supply, music_disc_waves, music_disc_dive, music_disc_tide, music_disc_drowned_anthem, music_disc_spiral, 1",
 
-            "minecraft:chests/elder_guardian, music_disc_dive, music_disc_tide, music_disc_submerge, 1",
+            "minecraft:entities/elder_guardian, music_disc_dive, music_disc_tide, music_disc_submerge, 1",
             "minecraft:entities/ender_dragon, music_disc_droopylovesjean, 1",
 
             "minecraft:entities/mooshroom, music_disc_shroom, music_disc_mush_roam, S",

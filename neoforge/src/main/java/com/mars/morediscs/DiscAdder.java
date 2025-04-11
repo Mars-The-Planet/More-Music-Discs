@@ -15,6 +15,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
 
+import java.awt.desktop.SystemEventListener;
 import java.util.ArrayList;
 
 import static com.mars.morediscs.MoreDiscs.ITEM_LIST;
@@ -55,20 +56,6 @@ public class DiscAdder extends LootModifier {
         }
 
         return generatedLoot;
-
-
-
-
-        //
-        /*for (String disc_loot : discs_loot_list) {
-            String[] set = disc_loot.replaceAll("\\s", "").split(",");
-            for (int i = 0; i < set.length - 2; i++) {
-                if(set[0].equals(currentTable.toString()) && 1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
-                    generatedLoot.add(new ItemStack(ITEM_LIST.get(set[i + 1]).asItem()));
-            }
-        }
-
-        return generatedLoot;*/
     }
 
     @Override
