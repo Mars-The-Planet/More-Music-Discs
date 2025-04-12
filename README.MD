@@ -30,10 +30,9 @@
 <p><img src="https://i.imgur.com/Lq0pT29.jpeg" width="20" /><a href="https://www.youtube.com/c/LostAngelYT"> Lost Angel </a></p>
 <p><img src="https://i.imgur.com/tHNe87D.jpeg" width="20" /><a href="https://www.youtube.com/@AvunTunes"> Les Airs de Schakavun </a></p>
 <p><img src="https://i.imgur.com/BJ6wkXv.png" width="20" /><a href="https://legacy.curseforge.com/members/sgtsalamander/projects"> SgtSalamander </a></p>
-<h1>Playlist with the discs </h1>
+<h1>Playlist with these music discs </h1>
 <p>Below is a playlist featuring most of the music discs included in this mod. A few are missing either because they were removed from YouTube or were never uploaded there in the first place.</p>
 <a href="https://www.youtube.com/playlist?list=PLc8au_-4_6O7Bg05dFotyyX5ma7d7At4_"><img src="https://i.imgur.com/CkPEMEu.png" width="400"/></a>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=P_XYJz7aZzXLUCm_&amp;list=PLc8au_-4_6O7Bg05dFotyyX5ma7d7At4_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <h1>Loot tables</h1>
 <details>
 <summary>Spoiler</summary>
@@ -179,12 +178,12 @@
 <li>Lost Angel - The Speedrunner</li>
 <li>Schakavun - Sleepz</li>
 </ul>
-<h2>Mooshroom</h2>
+<h2>Mooshroom killed by a Skeleton</h2>
 <ul>
 <li>Kaz Yumayui - Shroom</li>
 <li>beaniefrog - mush roam</li>
 </ul>
-<h2>Witch</h2>
+<h2>Witch killed by a Skeleton</h2>
 <ul>
 <li>Schakavun - Azometrall</li>
 <li>Schakavun - Turfufact</li>
@@ -192,11 +191,11 @@
 <li>CarrotAndCo - Potion Of Swiftness</li>
 <li>Doom_On_A_Spoon - Mangrove Swamp</li>
 </ul>
-<h2>Skeleton</h2>
+<h2>Skeleton killed by a Skeleton</h2>
 <ul>
 <li>Spooky Skeleton - Clouds</li>
 </ul>
-<h2>Pig</h2>
+<h2>Pig killed by a Skeleton</h2>
 <ul>
 <li>RedWolfNinja - Technoblade Never Dies, at least in our hearts</li>
 </ul>
