@@ -24,7 +24,7 @@ neoForge {
         }
         data {
             //in 1.21.4+ use clientData()
-            data()
+            clientData()
         }
         server {
             server()
