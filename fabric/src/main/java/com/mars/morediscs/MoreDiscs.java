@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntityTypePredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -60,7 +62,8 @@ public class MoreDiscs implements ModInitializer {
 
                         if(set[set.length - 1].equals("S")){
                             poolBuilder.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER,
-                                    EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)));
+                                    EntityPredicate.Builder.entity()
+                                            .entityType(EntityTypePredicate.of(BuiltInRegistries.ENTITY_TYPE, EntityType.SKELETON))));
                         }
                         else{
                             float chance = 1 / Float.parseFloat(set[set.length - 1]);
@@ -77,7 +80,8 @@ public class MoreDiscs implements ModInitializer {
 
     public Item registerItem(String name){
         Item item = Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, name),
-                new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(registerJukeboxSong(name + "_sound")).stacksTo(1)));
+                new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(registerJukeboxSong(name + "_sound")).stacksTo(1)
+                        .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, name)))));
 
         if(!name.equals("music_disc_test"))
             ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register(entries -> entries.accept(item));

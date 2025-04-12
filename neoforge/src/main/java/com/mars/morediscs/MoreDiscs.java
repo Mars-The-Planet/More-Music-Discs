@@ -55,7 +55,8 @@ public class MoreDiscs {
 
     public static DeferredItem<Item> registerItem(String name){
         DeferredItem<Item> item = ITEMS.register(name,
-                () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(registerJukeboxSong(name + "_sound"))));
+                () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(registerJukeboxSong(name + "_sound"))
+                        .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, name)))));
 
         ITEM_LIST.put(name, item);
         return item;

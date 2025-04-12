@@ -43,8 +43,8 @@ public class DiscAdder extends LootModifier {
                 }
 
                 if(set[set.length - 1].equals("S")){
-                    if(lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE) != null &&
-                            lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
+                    if(lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE) != null &&
+                            lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
                         generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
                 }
                 else if(1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))

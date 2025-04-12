@@ -8,10 +8,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class DiscAdder extends LootModifier {
     }
 
     @Override
-    protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext) {
+    protected @NotNull ObjectArrayList<ItemStack> doApply(LootTable lootTable, ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext) {
         if(!enable_loot_modifiers)
             return generatedLoot;
 
@@ -43,8 +45,8 @@ public class DiscAdder extends LootModifier {
                 }
 
                 if(set[set.length - 1].equals("S")){
-                    if(lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE) != null &&
-                            lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
+                    if(lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE) != null &&
+                            lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
                         generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
                 }
                 else if(1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
