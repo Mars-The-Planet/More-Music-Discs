@@ -5,12 +5,31 @@
 <a href="https://www.curseforge.com/minecraft/mc-mods/more-mc-music-discs" ><img src="https://img.shields.io/curseforge/dt/471002?color=F16436&amp;logo=curseforge&amp;logoColor=white&amp;label=Curseforge&amp;style=for-the-badge" alt="CurseForge" /></a>
 <a href="https://modrinth.com/mod/more-music-discs" ><img src="https://img.shields.io/modrinth/dt/more-music-discs?style=for-the-badge&amp;logo=modrinth&amp;logoColor=white&amp;label=modrinth&amp;color=00AF5C" alt="Modrinth" /></a>
 </strong></h5></center>
-<center><p>This mod adds custom music discs featuring tracks from YouTube. You can find these discs as loot in chests, as rare drops from specific mobs, or simply grab them from the new creative tab. I’ve received permission from the original creators to include their music in this mod.</p>
+<center><p>This mod adds custom music discs featuring tracks from YouTube. You can find them as loot in chests, rare drops from specific mobs, or access them directly from the new creative tab. The loot tables are fully customizable or can be disabled entirely through the mod's config. All included tracks are used with permission from their original creators.</p>
 <p style="text-align: center;"><img src="https://i.imgur.com/fFpCldQ.png" width="461"/>
 <img src="https://i.imgur.com/aGwZGo4.png" width="461"/>
 <img src="https://i.imgur.com/Pwi7Fjm.png" width="461"/></p></center>
 <details>
 <summary>Configuration</summary>
+<p>You can configure this mod either directly in-game or by editing the JSON file <code>config/morediscs.json</code> in your profile folder.</p>
+<center>
+<p style="text-align: center;"><p style="text-align: center;"><b>enable_loot_modifiers</b> - Whether this mod should modify loot tables by adding its own loot pools based on the config below</p>
+<p style="text-align: center;">
+  <b>discs_loot_list</b> – This is a list of loot pools added by the mod.  
+  It is highly recommended to edit this file using a text editor rather than modifying it in-game.<br><br>
+  Each entry in the discs_loot_list list has multiple parts:
+  <ul style="text-align: left; display: inline-block;">
+    <li>The first item defines the loot table to be modified.</li>
+    <li>The following items are the music discs to be added as potential drops.</li>
+    <li>The final item must be either:
+      <ul>
+        <li>A natural number which sets the drop chance for the listed discs (e.g., using <code>2</code> gives each disc a 1 in 2, or 50%, chance to drop),</li>
+        <li>or the letter <code>S</code>, which is only valid for entity loot tables. This causes one of the listed discs to drop when the entity is killed by a skeleton.</li>
+      </ul>
+    </li>
+  </ul>
+<img src="https://i.imgur.com/mu6xBvr.png" width="650"/>
+</center>
 </details>
 <h1>Authors of these music discs </h1>
 <p><img src="https://i.imgur.com/85GW19a.jpeg" width="20" /><a href="https://www.youtube.com/channel/UC_yqACxzLjNNMTL1WGbG2Qw"> Starshine Animatics</a></p>
@@ -248,3 +267,31 @@
 </ul>
 </details>
 <h1>Copyright</h1>
+<p>I asked each author before I planned to add their music to the mod if I could use their music in a Minecraft mod, and they all said I could add their music into a Minecraft mod.</p>
+<details>
+<summary>Spoiler</summary>
+<p>I haven't added music by some of these authors yet.</p>
+<p><img src="https://i.imgur.com/09uCYIP.png" width="400"><img src="https://i.imgur.com/O2B99GB.png" width="400"></p>
+<p><img src="https://i.imgur.com/w4gdqf0.png" width="400"><img src="https://i.imgur.com/NElGxxh.png" width="400"></p>
+<p><img src="https://i.imgur.com/UHwgpMy.png" width="400"><img src="https://i.imgur.com/E3knRSO.png" width="400"></p>
+<p><img src="https://i.imgur.com/x6znA4O.png" width="400"><img src="https://i.imgur.com/F7qcUM5.png" width="400"></p>
+<p><img src="https://i.imgur.com/27iOzxQ.png" width="400"><img src="https://i.imgur.com/h532yQE.png" width="400"></p>
+<p><img src="https://i.imgur.com/QSnyhix.png" width="400"><img src="https://i.imgur.com/et7lasw.png" width="400"></p>
+<p><img src="https://i.imgur.com/IdqzUGc.png" width="400"><img src="https://i.imgur.com/tKOHnpG.png" width="400"></p>
+<p><img src="https://i.imgur.com/JTvxNCw.png" width="400"><img src="https://i.imgur.com/V706GsP.png" width="400"></p>
+<p><img src="https://i.imgur.com/dK1OQ3n.png" width="400"><img src="https://i.imgur.com/faZ0UxF.png" width="400"></p>
+<p><img src="https://i.imgur.com/nPiSo2J.png" width="400"><img src="https://i.imgur.com/n5CYGwH.png" width="400"></p>
+<p><img src="https://i.imgur.com/lDj7GnP.png" width="400"></p>
+<p>If you are one of the authors of these music discs and you no longer agree with its use in the minecraft mod, you can contact me and I will remove it.</p>
+<p>My discord: M4rs#5621</p>
+</details>
+<hr>
+<center><p style="text-align: center;">
+<img src="https://i.imgur.com/JNZ2GMV.png"/>
+<a href="https://www.curseforge.com/minecraft/mc-mods/deimos-fabric-forge-neoforge" rel="nofollow">
+<img src="https://i.imgur.com/83sD0W8.png"/></a>
+<a href="https://modrinth.com/mod/deimos" rel="nofollow">
+<img src="https://i.imgur.com/j2GIPnt.png"/></a>
+</p></center>
+<p style="text-align: center;"><a href="https://url-shortener.curseforge.com/V3ISX" rel="nofollow">
+<img src="https://i.imgur.com/y3LiTfU.png"/></a></p>
