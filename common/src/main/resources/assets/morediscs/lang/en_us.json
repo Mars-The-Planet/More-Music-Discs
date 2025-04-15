@@ -1,5 +1,5 @@
 {
-    "itemgroup.morediscs.music_disc_group": "Music Discs",
+    "itemGroup.morediscs.music_disc_group": "Music Discs",
     "morediscs.deimosconfig.title": "More Music Discs Config",
     "morediscs.deimosconfig.enable_loot_modifiers": "Should this mod add discs into loot tables",
     "morediscs.deimosconfig.discs_loot_list": "Loot table modifications visit website for more info",

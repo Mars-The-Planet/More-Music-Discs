@@ -1,14 +1,10 @@
 package com.mars.morediscs;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.EntityTypeTags;
@@ -31,18 +27,14 @@ import static com.mars.morediscs.MoreDiscsConfig.enable_loot_modifiers;
 
 public class MoreDiscs implements ModInitializer {
     public static final HashMap<String, Item> ITEM_LIST = new HashMap<>();
-    public static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "music_disc_group"));
+    public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(
+            new ResourceLocation(MOD_ID, "music_disc_group"), () -> new ItemStack(ITEM_LIST.get("music_disc_test")));
 
     @Override
     public void onInitialize() {
         CommonClass.init();
 
         MUSIC_DISCS_NAMES.forEach(this::registerItem);
-
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricItemGroup.builder()
-                .title(Component.translatable("itemgroup.morediscs.music_disc_group"))
-                .icon(() -> new ItemStack(ITEM_LIST.get("music_disc_test")))
-                .build());
 
         if(enable_loot_modifiers){
             for (String disc_loot : discs_loot_list) {
@@ -77,11 +69,9 @@ public class MoreDiscs implements ModInitializer {
     public RecordItem registerItem(String name){
         SoundEvent soundEvent = registerJukeboxSong(name + "_sound");
 
-        RecordItem item = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(MOD_ID, name),
-                new RecordItem(1, soundEvent, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), MUSIC_DISC_LENGTHS.get(name)));
-
-        if(!name.equals("music_disc_test"))
-            ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register(entries -> entries.accept(item));
+        RecordItem item = Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, name), name.equals("music_disc_test") ?
+                new RecordItem(1, soundEvent, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), MUSIC_DISC_LENGTHS.get(name)) :
+                new RecordItem(1, soundEvent, new Item.Properties().tab(ITEM_GROUP).rarity(Rarity.RARE).stacksTo(1), MUSIC_DISC_LENGTHS.get(name)));
 
         ITEM_LIST.put(name, item);
         return item;
@@ -89,6 +79,6 @@ public class MoreDiscs implements ModInitializer {
 
     public static SoundEvent registerJukeboxSong(String name) {
         ResourceLocation id = new ResourceLocation(MOD_ID, name);
-        return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createFixedRangeEvent(id, 75));
+        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id, 75));
     }
 }
