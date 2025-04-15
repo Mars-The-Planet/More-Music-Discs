@@ -1,11 +1,11 @@
 package com.mars.morediscs;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.*;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -31,15 +31,13 @@ public class MoreDiscs {
 
         @Override
         public Component getDisplayName(){
-            return Component.translatable("itemGroup.morediscs.music_disc_group");
+            return new TranslatableComponent("itemGroup.morediscs.music_disc_group");
         }
     };
     public static final HashMap<String, RegistryObject<RecordItem>> ITEM_LIST = new HashMap<>();
     public static final HashMap<String, RegistryObject<SoundEvent>> SOUND_EVENT_LIST = new HashMap<>();
-    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>>  GLOBAL_LOOT_MODIFIER_SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
-    public static final RegistryObject<Codec<? extends DiscAdder>> MY_LOOT_MODIFIER =
-            GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("disc_adder", DiscAdder.CODEC::codec);
+    public static final DeferredRegister<GlobalLootModifierSerializer<?>> MY_LOOT_MODIFIER = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, MOD_ID);
+
     public MoreDiscs() {
         CommonClass.init();
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -49,11 +47,12 @@ public class MoreDiscs {
         MUSIC_DISCS_NAMES.forEach(MoreDiscs::registerItem);
         ITEMS.register(eventBus);
 
-        GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(eventBus);
+        MY_LOOT_MODIFIER.register(eventBus);
+        MY_LOOT_MODIFIER.register("disc_adder", DiscAdder.Serializer::new);
     }
 
     public static RegistryObject<SoundEvent> registerSoundEvent(String name){
-        RegistryObject<SoundEvent> soundEvent = SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MOD_ID, name + "_sound"), 75f));
+        RegistryObject<SoundEvent> soundEvent = SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MOD_ID, name + "_sound")));
 
         SOUND_EVENT_LIST.put(name, soundEvent);
         return soundEvent;
@@ -61,8 +60,8 @@ public class MoreDiscs {
 
     public static RegistryObject<RecordItem> registerItem(String name){
         RegistryObject<RecordItem> item = ITEMS.register(name, () -> name.equals("music_disc_test") ?
-                new RecordItem(1, SOUND_EVENT_LIST.get(name), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), MUSIC_DISC_LENGTHS.get(name) * 20) :
-                new RecordItem(1, SOUND_EVENT_LIST.get(name), new Item.Properties().tab(ITEM_GROUP).stacksTo(1).rarity(Rarity.RARE), MUSIC_DISC_LENGTHS.get(name) * 20));
+                new RecordItem(1, SOUND_EVENT_LIST.get(name), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)) :
+                new RecordItem(1, SOUND_EVENT_LIST.get(name), new Item.Properties().tab(ITEM_GROUP).stacksTo(1).rarity(Rarity.RARE)));
 
         ITEM_LIST.put(name, item);
         return item;

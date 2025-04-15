@@ -69,9 +69,7 @@ public class MoreDiscs implements ModInitializer {
     public RecordItem registerItem(String name){
         SoundEvent soundEvent = registerJukeboxSong(name + "_sound");
 
-        RecordItem item = Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, name), name.equals("music_disc_test") ?
-                new RecordItem(1, soundEvent, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), MUSIC_DISC_LENGTHS.get(name)) :
-                new RecordItem(1, soundEvent, new Item.Properties().tab(ITEM_GROUP).rarity(Rarity.RARE).stacksTo(1), MUSIC_DISC_LENGTHS.get(name)));
+        RecordItem item = Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, name), new MusicDiscItem(soundEvent, name));
 
         ITEM_LIST.put(name, item);
         return item;
@@ -79,6 +77,6 @@ public class MoreDiscs implements ModInitializer {
 
     public static SoundEvent registerJukeboxSong(String name) {
         ResourceLocation id = new ResourceLocation(MOD_ID, name);
-        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id, 75));
+        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
     }
 }
