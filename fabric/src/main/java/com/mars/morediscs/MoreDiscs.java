@@ -31,18 +31,16 @@ import static com.mars.morediscs.MoreDiscsConfig.enable_loot_modifiers;
 
 public class MoreDiscs implements ModInitializer {
     public static final HashMap<String, Item> ITEM_LIST = new HashMap<>();
-    public static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "music_disc_group"));
+    public static final CreativeModeTab ITEM_GROUP = FabricItemGroup.builder(new ResourceLocation(MOD_ID, "music_disc_group"))
+            .title(Component.translatable("itemgroup.morediscs.music_disc_group"))
+            .icon(() -> new ItemStack(ITEM_LIST.get("music_disc_test")))
+            .build();
 
     @Override
     public void onInitialize() {
         CommonClass.init();
 
         MUSIC_DISCS_NAMES.forEach(this::registerItem);
-
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricItemGroup.builder()
-                .title(Component.translatable("itemgroup.morediscs.music_disc_group"))
-                .icon(() -> new ItemStack(ITEM_LIST.get("music_disc_test")))
-                .build());
 
         if(enable_loot_modifiers){
             for (String disc_loot : discs_loot_list) {

@@ -8,7 +8,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,8 +28,6 @@ import static com.mars.morediscs.Constants.MOD_ID;
 public class MoreDiscs {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MOD_ID);
-
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
     public static final HashMap<String, RegistryObject<RecordItem>> ITEM_LIST = new HashMap<>();
     public static final HashMap<String, RegistryObject<SoundEvent>> SOUND_EVENT_LIST = new HashMap<>();
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>>  GLOBAL_LOOT_MODIFIER_SERIALIZERS =
@@ -44,20 +44,23 @@ public class MoreDiscs {
         MUSIC_DISCS_NAMES.forEach(MoreDiscs::registerItem);
         ITEMS.register(eventBus);
 
-
-        CREATIVE_MODE_TAB.register("music_disc_group", () -> CreativeModeTab.builder().title(Component.literal("More Music Discs"))
-                .withTabsBefore(CreativeModeTabs.COMBAT)
-                .icon(() -> ITEM_LIST.get("music_disc_test").get().getDefaultInstance())
-                .displayItems(
-                        (parameters, output) -> {
-                            for (int i = 0; i < MUSIC_DISCS_NAMES.size() - 1; i++) {
-                                output.accept(ITEM_LIST.get(MUSIC_DISCS_NAMES.get(i + 1)).get());
-                            }
-                        }
-                ).build());
-        CREATIVE_MODE_TAB.register(eventBus);
+        eventBus.addListener(this::onCreativeTabRegistry);
 
         GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(eventBus);
+    }
+
+    @SubscribeEvent
+    public void onCreativeTabRegistry(CreativeModeTabEvent.Register event) {
+        event.registerCreativeModeTab(new ResourceLocation(MOD_ID, "music_disc_group"), builder -> {
+            builder.title(Component.translatable("itemgroup.morediscs.music_disc_group"))
+                    .icon(() -> ITEM_LIST.get("music_disc_test").get().getDefaultInstance())
+                    .displayItems((parameters, output) -> {
+                        for (int i = 0; i < MUSIC_DISCS_NAMES.size() - 1; i++) {
+                            output.accept(ITEM_LIST.get(MUSIC_DISCS_NAMES.get(i + 1)).get());
+                        }
+                    })
+                    .build();
+        });
     }
 
     public static RegistryObject<SoundEvent> registerSoundEvent(String name){
