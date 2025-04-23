@@ -28,7 +28,10 @@
       </ul>
     </li>
   </ul>
-<img src="https://i.imgur.com/mu6xBvr.png" width="650"/>
+<center><p style="text-align: center;"><strong>For example:</strong></p></center>
+<center><p style="text-align: center;"><code>"minecraft:chests/desert_pyramid, music_disc_tragicdecision, music_disc_desert, music_disc_sand, music_disc_scorched, music_disc_ancientruins, 5",</code></p></center>
+<center><p style="text-align: center;">This would add a 20% chance to get one of the listed music discs from a desert pyramid chest</p></center>
+<img src="https://i.imgur.com/PmSP9Mc.png" width="650"/>
 </center>
 </details>
 <h1>Authors of these music discs </h1>
