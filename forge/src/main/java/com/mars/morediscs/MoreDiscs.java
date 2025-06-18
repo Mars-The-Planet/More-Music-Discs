@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,7 +31,7 @@ public class MoreDiscs {
             GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("disc_adder", () -> DiscAdder.CODEC);
     public MoreDiscs() {
         CommonClass.init();
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        var eventBus = FMLJavaModLoadingContext.get().getModBusGroup();
 
         MUSIC_DISCS_NAMES.forEach(MoreDiscs::registerItem);
         ITEMS.register(eventBus);
