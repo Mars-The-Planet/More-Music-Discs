@@ -3,9 +3,9 @@ package com.mars.morediscs;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -32,7 +32,7 @@ public class DiscAdder extends LootModifier {
             return generatedLoot;
 
         RandomSource random = lootContext.getRandom();
-        ResourceLocation currentTable = lootContext.getQueriedLootTableId();
+        Identifier currentTable = lootContext.getQueriedLootTableId();
 
         for (String disc_loot : discs_loot_list) {
             String[] set = disc_loot.replaceAll("\\s", "").split(",");

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.fml.common.Mod;
@@ -54,13 +54,13 @@ public class MoreDiscs {
     public static RegistryObject<Item> registerItem(String name){
         RegistryObject<Item> item = ITEMS.register(name,
                 () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(registerJukeboxSong(name + "_sound"))
-                        .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, name)))));
+                        .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name)))));
 
         ITEM_LIST.put(name, item);
         return item;
     }
 
     public static ResourceKey<JukeboxSong> registerJukeboxSong(String name){
-        return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(MOD_ID, name));
+        return ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.fromNamespaceAndPath(MOD_ID, name));
     }
 }

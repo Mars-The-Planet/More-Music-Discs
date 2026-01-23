@@ -4,15 +4,14 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.EntityTypePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.EntityTypePredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -23,9 +22,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 import static com.mars.morediscs.CommonClass.MUSIC_DISCS_NAMES;
 import static com.mars.morediscs.Constants.MOD_ID;
@@ -34,7 +31,7 @@ import static com.mars.morediscs.MoreDiscsConfig.enable_loot_modifiers;
 
 public class MoreDiscs implements ModInitializer {
     public static final HashMap<String, Item> ITEM_LIST = new HashMap<>();
-    public static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), ResourceLocation.fromNamespaceAndPath(MOD_ID, "music_disc_group"));
+    public static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Identifier.fromNamespaceAndPath(MOD_ID, "music_disc_group"));
 
     @Override
     public void onInitialize() {
@@ -52,7 +49,7 @@ public class MoreDiscs implements ModInitializer {
                 String[] set = disc_loot.replaceAll("\\s", "").split(",");
 
                 LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-                    if(key.location().toString().equals(set[0])) {
+                    if(key.identifier().toString().equals(set[0])) {
                         LootPool.Builder poolBuilder = LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1));
 
@@ -79,9 +76,9 @@ public class MoreDiscs implements ModInitializer {
     }
 
     public Item registerItem(String name){
-        Item item = Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, name),
+        Item item = Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name),
                 new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(registerJukeboxSong(name + "_sound")).stacksTo(1)
-                        .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, name)))));
+                        .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name)))));
 
         if(!name.equals("music_disc_test"))
             ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register(entries -> entries.accept(item));
@@ -91,6 +88,6 @@ public class MoreDiscs implements ModInitializer {
     }
 
     public static ResourceKey<JukeboxSong> registerJukeboxSong(String name) {
-        return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(MOD_ID, name));
+        return ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.fromNamespaceAndPath(MOD_ID, name));
     }
 }
