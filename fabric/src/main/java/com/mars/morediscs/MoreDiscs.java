@@ -1,8 +1,8 @@
 package com.mars.morediscs;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.EntityTypePredicate;
@@ -39,7 +39,7 @@ public class MoreDiscs implements ModInitializer {
 
         MUSIC_DISCS_NAMES.forEach(this::registerItem);
 
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricItemGroup.builder()
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricCreativeModeTab.builder()
                 .title(Component.translatable("itemgroup.morediscs.music_disc_group"))
                 .icon(() -> new ItemStack(ITEM_LIST.get("music_disc_test")))
                 .build());
@@ -65,7 +65,7 @@ public class MoreDiscs implements ModInitializer {
                         else{
                             float chance = 1 / Float.parseFloat(set[set.length - 1]);
                             LootItemCondition chanceCondition = LootItemRandomChanceCondition.randomChance(chance).build();
-                            poolBuilder.conditionally(chanceCondition);
+                            poolBuilder.when(chanceCondition);
                         }
 
                         tableBuilder.pool(poolBuilder.build());
@@ -81,7 +81,7 @@ public class MoreDiscs implements ModInitializer {
                         .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name)))));
 
         if(!name.equals("music_disc_test"))
-            ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register(entries -> entries.accept(item));
+            CreativeModeTabEvents.modifyOutputEvent(ITEM_GROUP).register(entries -> entries.accept(item));
 
         ITEM_LIST.put(name, item);
         return item;
