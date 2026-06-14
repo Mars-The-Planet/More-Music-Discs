@@ -22,8 +22,8 @@ import static com.mars.morediscs.MoreDiscsConfig.enable_loot_modifiers;
 public class DiscAdder extends LootModifier {
     public static final MapCodec<DiscAdder> CODEC = RecordCodecBuilder.mapCodec(inst ->
             LootModifier.codecStart(inst).apply(inst, DiscAdder::new));
-    protected DiscAdder(LootItemCondition[] conditionsIn) {
-        super(conditionsIn);
+    protected DiscAdder(LootItemCondition[] conditionsIn, int priority) {
+        super(conditionsIn, priority);
     }
 
     @Override
