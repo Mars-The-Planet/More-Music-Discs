@@ -4,15 +4,15 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.EntityTypePredicate;
+import net.minecraft.advancements.predicates.entity.EntityPredicate;
+import net.minecraft.advancements.predicates.entity.EntityTypePredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -60,7 +60,7 @@ public class MoreDiscs implements ModInitializer {
                         if(set[set.length - 1].equals("S")){
                             poolBuilder.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER,
                                     EntityPredicate.Builder.entity()
-                                            .entityType(EntityTypePredicate.of(BuiltInRegistries.ENTITY_TYPE, EntityType.SKELETON))));
+                                            .entityType(EntityTypePredicate.of(BuiltInRegistries.ENTITY_TYPE, EntityTypes.SKELETON))));
                         }
                         else{
                             float chance = 1 / Float.parseFloat(set[set.length - 1]);
