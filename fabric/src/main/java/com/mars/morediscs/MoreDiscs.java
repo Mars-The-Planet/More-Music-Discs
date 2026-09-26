@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.advancements.predicates.entity.EntityTypePredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ConstantValue;
 
 import java.util.HashMap;
 
@@ -49,9 +50,11 @@ public class MoreDiscs implements ModInitializer {
                 String[] set = disc_loot.replaceAll("\\s", "").split(",");
 
                 LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+                    ConstantValue one = new ConstantValue(1);
+
                     if(key.identifier().toString().equals(set[0])) {
                         LootPool.Builder poolBuilder = LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1));
+                                .setRolls(Holder.direct(one));
 
                         for (int i = 0; i < set.length - 2; i++) {
                             poolBuilder.add(LootItem.lootTableItem(ITEM_LIST.get(set[i + 1])));

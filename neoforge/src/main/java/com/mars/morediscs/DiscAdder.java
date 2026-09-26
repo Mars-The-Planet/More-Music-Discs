@@ -3,6 +3,7 @@ package com.mars.morediscs;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.monster.skeleton.Skeleton;
@@ -14,6 +15,7 @@ import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static com.mars.morediscs.MoreDiscs.ITEM_LIST;
 import static com.mars.morediscs.MoreDiscsConfig.discs_loot_list;
@@ -22,7 +24,7 @@ import static com.mars.morediscs.MoreDiscsConfig.enable_loot_modifiers;
 public class DiscAdder extends LootModifier {
     public static final MapCodec<DiscAdder> CODEC = RecordCodecBuilder.mapCodec(inst ->
             LootModifier.codecStart(inst).apply(inst, DiscAdder::new));
-    protected DiscAdder(LootItemCondition[] conditionsIn, int priority) {
+    protected DiscAdder(Optional<Holder<LootItemCondition>> conditionsIn, int priority) {
         super(conditionsIn, priority);
     }
 
@@ -43,8 +45,8 @@ public class DiscAdder extends LootModifier {
                 }
 
                 if(set[set.length - 1].equals("S")){
-                    if(lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE) != null &&
-                            lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
+                    if(lootContext.getOptional(LootContextParams.DAMAGE_SOURCE) != null &&
+                            lootContext.getOptional(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
                         generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
                 }
                 else if(1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
