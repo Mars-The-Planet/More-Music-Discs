@@ -43,13 +43,30 @@ public class DiscAdder extends LootModifier {
                     itemList.add(new ItemStack(ITEM_LIST.get(set[i + 1]).get()));
                 }
 
+//                if(set[set.length - 1].equals("S")){
+//                    if(lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE) != null &&
+//                            lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
+//                        generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
+//                }
+//                else if(1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
+//                    generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
+
+                //TEST
                 if(set[set.length - 1].equals("S")){
                     if(lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE) != null &&
                             lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE).getEntity() instanceof Skeleton)
                         generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
                 }
-                else if(1 == random.nextIntBetweenInclusive(1, Integer.parseInt(set[set.length - 1])))
-                    generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
+                else{
+                    int cislo = Integer.parseInt(set[set.length - 1]);
+                    int randomcislo = random.nextIntBetweenInclusive(1, cislo);
+                    System.out.println("cislo: " + cislo);
+                    System.out.println("random: " + randomcislo);
+                    if(1 == randomcislo){
+                        generatedLoot.add(itemList.get(random.nextIntBetweenInclusive(0, itemList.size() - 1)));
+                        System.out.println("BAF");
+                    }
+                }
             }
         }
 
